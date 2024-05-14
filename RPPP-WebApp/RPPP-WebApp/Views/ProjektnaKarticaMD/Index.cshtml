@@ -1,0 +1,73 @@
+﻿@model ProjektneKarticeViewModel
+
+@{
+    ViewBag.Title = "ProjektnaKartica";
+}
+
+<div class="container">
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <h2>Pregled svih projektnih kartica</h2>
+            <br />
+            <a asp-action="Create">Unos nove kartice</a>
+        </div>
+    </div>
+</div>
+
+<pager page-info="@Model.PagingInfo" page-action="Index" page-title="Unesite željenu stranicu"
+       class="float-end">
+</pager>
+
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Šifra kartice", "IBAN kartice", "Stanje", "Naziv projekta", "Naziv zadužene osobe" };
+                for (int i = 1; i <= nazivi.Length; i++)
+                {
+                    <th>
+                        <a asp-route-sort="@i"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+                            @nazivi[i - 1]
+                        </a>
+                    </th>
+                }
+            }
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kartica in Model.ProjektneKartice)
+        {
+            <tr>
+                <td class="text-left">
+                    <a asp-action="Show"
+                       asp-route-id="@kartica.IdKartice"
+                       asp-route-page="@Model.PagingInfo.CurrentPage"
+                       asp-route-sort="@Model.PagingInfo.Sort"
+                       asp-route-ascending="@Model.PagingInfo.Ascending">
+                        @kartica.IdKartice
+                    </a>
+                </td>
+                <td class="text-left">@kartica.Ibankartice</td>
+                <td class="text-left">@kartica.Stanje</td>
+                <td class="text-left">@kartica.NazivProjekta</td>
+                <td class="text-left">@kartica.NazivOsobe</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <script src="/lib/jqueryui/jquery-ui.js"></script>
+    <script src="/js/pager.js" asp-append-version="true"></script>
+    <script src="~/lib/htmx/htmx.min.js" asp-append-version="true"></script>
+}

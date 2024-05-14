@@ -1,0 +1,65 @@
+﻿@model IEnumerable<TransakcijaViewModel>
+<table class="table table-striped" id="table-stavke">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Iznos", "IBAN2", "Datum", "Vrijeme", "Opis transakcije" };
+                for (int i = 0; i < nazivi.Length; i++)
+                {
+                    <th class="text-center">
+                        @nazivi[i]
+                    </th>
+                }
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transakcija in Model)
+        {
+            <tr>
+                <td class="text-left col-sm-4">
+                    <input type="hidden" name="Transakcije.Index" value="@transakcija.Iznos" />
+                    <input type="hidden" name="Transakcije[@transakcija.IdTransakcije].Iznos" value="@transakcija.Iznos" />
+                    @transakcija.Iznos
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="Transakcije[@transakcija.IdTransakcije].Iban2zaTransakciju" class="form-control" value="@transakcija.Iban2zaTransakciju" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input type="datetime" name="Transakcije[@transakcija.IdTransakcije].Datum" class="form-control" value="@transakcija.Datum" />
+                </td>
+                <td class="text-right col-sm-3">
+                    <input type="time" name="Transakcije[@transakcija.IdTransakcije].Vrijeme" value="@transakcija.Vrijeme" />
+                </td>
+                <td class="text-right col-sm-3">
+                    <input name="Transakcije[@transakcija.IdTransakcije].Opis" value="@transakcija.Opis" />
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger deleterow" title="Izbaci">Izbaci</button>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td>
+                <input id="artikl-sifra" type="hidden" data-autocomplete-placeholder="artikl" readonly="readonly" />
+                <input id="artikl-naziv" type="text" data-autocomplete="artikl" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="artikl-kolicina" type="text" />
+            </td>
+            <td class="text-center col-sm-1">
+                <input id="artikl-rabat" type="date" />
+            </td>
+            <td class="text-right col-sm-2">
+                <input id="artikl-cijena" type="time" data-autocomplete-placeholder-cijena="artikl" />
+            </td>
+            <td class="text-right col-sm-2">
+                <input id="artikl-cijena" type="text" data-autocomplete-placeholder-cijena="artikl" />
+            </td>
+            <td class="text-left" colspan="3">
+                <button id="artikl-dodaj" class="btn btn-sm btn-secondary" title="Dodaj">Dodaj</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,30 @@
+﻿@model VrstaZahtjeva
+
+@{
+    ViewBag.Title = "Vrsta zahtjeva";
+}
+
+<h2>Unos nove vrste</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Naziv" class="form-label">Naziv vrste</label>
+        <input asp-for="Naziv" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Naziv" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Opis" class="form-label">Opis</label>
+        <input asp-for="Opis" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Opis" class="text-danger"></span></div>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+     <partial name="IncludeValidation" />
+ }

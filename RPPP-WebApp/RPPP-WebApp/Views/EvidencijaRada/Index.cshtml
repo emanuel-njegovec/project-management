@@ -1,0 +1,93 @@
+﻿@model EvidencijaRadaViewModel
+
+@{
+    ViewBag.Title = "Evidencija Rada";
+}
+
+<h2>Popis Evidencije Radova</h2>
+
+<div class="float-end">
+  <nav aria-label="Page navigation">
+    <ul class="pagination">
+      @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+      {
+        <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
+          <a class="page-link" href="@Url.Action("Index", new { page = i, sort = Model.PagingInfo.Sort, ascending = Model.PagingInfo.Ascending })">@i</a>
+        </li>
+      }
+    </ul>
+  </nav>
+</div>
+
+<a asp-action="Create">Unos novih zadataka</a>
+
+<table class="table table-sm table-striped table-hover">
+  <thead>
+  <tr>
+    <th>
+      <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+        Opis Rada
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+        Datum Rada
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+        Vrijeme Rada
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+        Osoba
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">
+        Zadatak
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">
+        Vrsta Posla
+      </a>
+    </th>
+    <th></th>
+  </tr>
+  </thead>
+  
+  <tbody>
+  @foreach (var rad in Model.EviRadovi)
+  {
+    <tr>
+      <td class="text-center">@rad.Opis</td>
+      <td class="text-center">@rad.DatumRada</td>
+      <td class="text-center">@rad.VrijemeRada</td>
+      <td class="text-center">@rad.OibosobaNavigation.Ime @rad.OibosobaNavigation.Prezime</td>
+      <td class="text-center">@rad.IdZadatkaNavigation.ImeZadatka</td>
+      <td class="text-center">@rad.IdVrstePoslaNavigation.Naziv</td>
+      
+      <td class="btn-group">
+        <a asp-action="Edit"
+           asp-route-id="@rad.IdEvidencijaRad"
+           class="btn btn-sm" title="Ažuriraj"><i class="fas fa-edit"></i></a>
+  
+        <form asp-action="Delete" method="post"
+                  asp-route-page="@Model.PagingInfo.CurrentPage"
+                  asp-route-sort="@Model.PagingInfo.Sort"
+                  asp-route-ascending="@Model.PagingInfo.Ascending">
+                <input type="hidden" name="id" value="@rad.IdEvidencijaRad" />
+                <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"><i class="fas fa-trash-alt"></i></button>
+            </form>
+      </td>
+    </tr>
+  }
+  </tbody>
+    
+</table>
+
+@section scripts {
+  <script src="~/js/pager.js" asp-append-version="true"></script>
+}

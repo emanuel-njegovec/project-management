@@ -1,0 +1,60 @@
+@model ProjektDTOViewModel
+
+@{
+    ViewBag.Title = "Projekt";
+    Layout = "_Layout";
+}
+
+<h2>Uređivanje Projekta</h2>
+
+<form asp-action="Edit" method="post">
+  
+  <div asp-validation-summary="All"></div>
+  
+  <input asp-for="IdProjekta" type="hidden" /> <!-- Dodano skriveno polje za ID projekta -->
+
+  <div class="mb-3">
+    <label asp-for="Naziv" class="form-label">Naziv Projekta</label>
+    <input asp-for="Naziv" class="form-control" />
+    <div class="form-text"><span asp-validation-for="Naziv" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="IdVrsteProjektaNavigation.Naziv" class="form-label"></label>
+    <select class="form-control" asp-for="IdVrsteProjektaNavigation.Naziv" asp-items="ViewBag.Projekt">
+      <option disabled selected value="">Odaberite Vrstu Projekta</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="IdVrsteProjektaNavigation.Naziv" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="Opis" class="form-label">Opis Projekta</label>
+    <input asp-for="Opis" class="form-control" />
+    <div class="form-text"><span asp-validation-for="Opis" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="DatumPocetka" class="form-label">Datum Početka</label>
+    <input asp-for="DatumPocetka" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="DatumPocetka" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="DatumZavrsetka" class="form-label">Datum Zavrsetka</label>
+    <input asp-for="DatumZavrsetka" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="DatumZavrsetka" class="text-danger"></span></div>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="Oibnarucitelj" class="form-label">OIB narucitelja</label>
+    <input asp-for="Oibnarucitelj" class="form-control" />
+    <div class="form-text"><span asp-validation-for="Oibnarucitelj" class="text-danger"></span></div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary" type="submit">Spremi promjene</button>
+    <a asp-action="Index" class="btn btn-default">Odustani</a>
+  </div>
+
+</form>
+

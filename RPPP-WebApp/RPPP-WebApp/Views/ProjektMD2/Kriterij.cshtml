@@ -1,0 +1,55 @@
+@model ProjektFilter
+
+
+<form id="filterform" asp-action="Filter" method="post">
+    <div class="form-group row">
+        <label asp-for="IdProjekta" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdProjekta" readonly="readonly" class="form-control" data-autocomplete-placeholder="projekt" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="projekt" asp-for="Naziv" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Datum Pocetka</label>
+        <div class="col-sm-4">
+            <input asp-for="DatumPocetka" class="form-control" />
+        </div>
+        <div class="col-sm-1">
+            -
+        </div>
+        <div class="col-sm-4">
+            <input asp-for="DatumZavrsetka" class="form-control" />
+        </div>
+        <div class="col-sm-1 text-nowrap">
+            <button type="submit" class="btn btn-sm btn-primary" title="Postavi filter"><i class="fas fa-filter"></i></button>           
+               
+            <a class="btn btn-sm btn-primary" asp-action="Index" title="Ukloni filter">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdVrsteProjekta" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdVrsteProjekta" readonly="readonly" class="form-control" data-autocomplete-placeholder="vrsta" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="zahtjev" asp-for="IdVrsteProjektaNavigation.Naziv" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="Oibnarucitelj" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="Oibnarucitelj" readonly="readonly" class="form-control" data-autocomplete-placeholder="narucitelj" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="status" asp-for="OibnaruciteljNavigation.Naziv" />
+        </div>               
+    </div>
+    
+</form>

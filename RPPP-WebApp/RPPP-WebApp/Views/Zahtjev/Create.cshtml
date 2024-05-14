@@ -1,0 +1,50 @@
+﻿@model Zahtjev
+
+@{
+    ViewBag.Title = "Novi zahtjev";
+}
+
+<h2>Unos novog zahtjeva</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Naslov" class="form-label">Naziv zahtjeva</label>
+        <input asp-for="Naslov" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Naslov" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Opis" class="form-label">Opis zahtjeva</label>
+        <input asp-for="Opis" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Opis" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="IdVrsteZahtjevaNavigation.Naziv" class="form-label">Odaberite vrstu zahtjeva</label>
+        <select class="form-control" asp-for="IdVrsteZahtjevaNavigation.Naziv" asp-items="ViewBag.Vrste">
+            <option disabled selected value="">Odaberite vrstu</option>
+            </select>
+        <div class="form-text"><span asp-validation-for="IdVrsteZahtjevaNavigation.Naziv" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="IdPrioritetaNavigation.Naziv" class="form-label">Odaberite prioritet</label>
+        <select class="form-control" asp-for="IdPrioritetaNavigation.Naziv" asp-items="ViewBag.Prioriteti">
+            <option disabled selected value="">Odaberite prioritet</option>
+            </select>
+        <div class="form-text"><span asp-validation-for="IdPrioritetaNavigation.Naziv" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="IdProjektaNavigation.Naziv" class="form-label">Odaberite projekt</label>
+        <select class="form-control" asp-for="IdProjektaNavigation.Naziv" asp-items="ViewBag.Projekti">
+            <option disabled selected value="">Odaberite projekt</option>
+            </select>
+        <div class="form-text"><span asp-validation-for="IdProjektaNavigation.Naziv" class="text-danger"></span></div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-secondary">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+     <partial name="IncludeValidation" />
+ } 

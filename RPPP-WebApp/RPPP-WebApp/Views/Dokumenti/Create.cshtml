@@ -1,0 +1,53 @@
+@model Dokument
+
+@{
+    ViewBag.Title = "Dokument";
+}
+
+<h2>Unos Novog Dokumenta</h2>
+
+<form asp-action="Create" method="post">
+
+  <div asp-validation-summary="All"></div>
+
+  <div class="mb-3">
+    <label asp-for="DatumNastanka" class="form-label">Datum Nastanka</label>
+    <input asp-for="DatumNastanka" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="DatumNastanka" class="text-danger"></span></div>
+  </div>
+
+  <div class="mb-3">
+      <label asp-for="Stavka" class="form-label">Stavka</label>
+      <input asp-for="Stavka" class="form-control"/>
+      <div class="form-text"><span asp-validation-for="Stavka" class="text-danger"></span></div>
+  </div>
+
+  <div class="mb-3">
+      <label asp-for="Format" class="form-label">Format</label>
+      <input asp-for="Format" class="form-control"/>
+      <div class="form-text"><span asp-validation-for="Format" class="text-danger"></span></div>
+    </div>
+
+
+  <div class="mb-3">
+    <label asp-for="IdProjektaNavigation.Naziv" class="form-label">Odaberite Projekt</label>
+    <select class="form-control" asp-for="IdProjektaNavigation.Naziv" asp-items="ViewBag.Projekti">
+      <option disabled selected value="">Odaberite Projekt</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="IdProjektaNavigation.Naziv" class="text-danger"></span></div>
+  </div>
+
+  <div class="mb-3">
+    <label asp-for="IdVrsteDokumentaNavigation.Naziv" class="form-label">Odaberite Vrstu</label>
+    <select class="form-control" asp-for="IdVrsteDokumentaNavigation.Naziv" asp-items="ViewBag.VrsteDokumenata">
+      <option disabled selected value="">Odaberite Vrstu</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="IdVrsteDokumentaNavigation" class="text-danger"></span></div>
+  </div>
+
+  <div class="text-center">
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+    <a asp-action="Index" class="btn btn-default">Odustani</a>
+  </div>
+
+</form>

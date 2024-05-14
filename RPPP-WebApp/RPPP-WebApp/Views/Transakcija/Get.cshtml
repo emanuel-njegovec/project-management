@@ -1,0 +1,24 @@
+﻿@model TransakcijaViewModel
+
+<tr hx-target="this" hx-swap="outerHTML">
+    <td class="text-left">@Model.IdTransakcije</td>
+    <td class="text-left">@Model.Iznos</td>
+    <td class="text-left">@Model.Iban2zaTransakciju</td>
+    <td class="text-left">@Model.Datum</td>
+    <td class="text-left">@Model.Vrijeme</td>
+    <td class="text-left">@Model.IbanKartice</td>
+    <td class="text-left">@Model.Opis</td>
+    <td>
+        <a class="btn btn-sm btn-warning"
+           hx-get="@Url.Action(nameof(ProjektnaKarticaController.Edit), new { id = Model.IdTransakcije })"
+           title="Ažuriraj">AŽURIRAJ</a>
+    </td>
+    <td>
+        <button class="btn btn-sm btn-danger"
+                hx-confirm="Obrisati karticu?"
+                hx-delete="@Url.Action(nameof(ProjektnaKarticaController.Delete), new { id = Model.IdTransakcije })"
+                title="Obriši">
+            OBRIŠI
+        </button>
+    </td>
+</tr>

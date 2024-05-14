@@ -1,0 +1,64 @@
+﻿@model PrioritetZahtjevaViewModel
+
+@{
+	ViewBag.Title = "Prioritet zahtjeva";
+}
+
+
+<h2>Pregled svih prioriteta zahtjeva</h2>
+
+<a asp-action="Create">Unos novog prioriteta zahtjeva</a>
+
+
+<div class="float-end">
+	<nav aria-label="Page navigation">
+		<ul class="pagination">
+			@for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+			{
+				<li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
+					<a class="page-link" href="@Url.Action("Index", new { page = i, sort = Model.PagingInfo.Sort, ascending = Model.PagingInfo.Ascending })">@i</a>
+				</li>
+			}
+		</ul>
+	</nav>
+</div>
+
+<table class="table table-sm table-striped table-hover">
+	<thead>
+		<tr>
+			<th>
+				<a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+					Naziv
+				</a>
+			</th>
+
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var prioritet in Model.Prioriteti)
+		{
+			<tr>
+				<td class="text-left">@prioritet.Naziv</td>
+				<td class="btn-group">
+					<a asp-action="Edit"
+					   asp-route-id="@prioritet.IdPrioriteta"
+					   class="btn btn-warning btn-sm" title="Ažuriraj">Ažuriraj<i class="fas fa-edit"></i></a>
+				</td>
+				<td class="btn-group">
+					<form asp-action="Delete" method="post"
+						  asp-route-page="@Model.PagingInfo.CurrentPage"
+						  asp-route-sort="@Model.PagingInfo.Sort"
+						  asp-route-ascending="@Model.PagingInfo.Ascending">
+						<input type="hidden" name="id" value="@prioritet.IdPrioriteta" />
+						<button type="submit" class="btn btn-sm btn-danger delete" title="Obriši">Obriši<i class="fas fa-trash-alt"></i></button>
+					</form>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+@section scripts{
+	<script src="~/js/pager.js" asp-append-version="true"></script>
+}

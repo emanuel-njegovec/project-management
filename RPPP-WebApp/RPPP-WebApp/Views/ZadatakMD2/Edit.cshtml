@@ -1,0 +1,303 @@
+﻿@model ZadatakDTOViewModel
+
+@{
+    ViewBag.Title = "Izmjena Zadatka";
+}
+
+<div class="container">
+    <form id="dokument_form" method="post" asp-action="Edit"
+          asp-route-page="@ViewBag.Page"
+          asp-route-sort="@ViewBag.Sort"
+          asp-route-ascending="@ViewBag.Ascending"
+          asp-route-filter="@ViewBag.Filter">
+        <input type="hidden" asp-for="IdZadatka"/>
+        <div asp-validation-summary="All" class="form-group row"></div>
+
+        <div class="flex-row" style="display: flex">
+            <div class="col-auto" style="width: 50%; padding: 20px">
+                <label asp-for="ImeZadatka" class="col-sm-1 col-form-label">Ime Zadatka</label>
+                <div class="col-auto">
+                    <input asp-for="ImeZadatka" class="form-control"/>
+                </div>
+
+                <label asp-for="IdZahtjeva" class="col-sm-1 col-form-label">Zahtjev</label>
+                <div class="col-auto">
+                    <input asp-for="IdZahtjeva" readonly="readonly" class="form-control" data-autocomplete-placeholder="Zahtjev"/>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" data-autocomplete="Zahtjev" asp-for="@Model.IdZahtjevaNavigation.Naslov"/>
+                </div>
+
+                <label asp-for="IdStatus" class="col-sm-1 col-form-label">Status</label>
+                <div class="col-auto">
+                    <input asp-for="IdStatus" readonly="readonly" class="form-control" data-autocomplete-placeholder="Status"/>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" data-autocomplete="Status" asp-for="@Model.IdStatusNavigation.Naziv"/>
+                </div>
+
+                <label asp-for="Oibosoba" class="col-sm-1 col-form-label">Osoba</label>
+                <div class="col-auto">
+                    <input asp-for="Oibosoba" readonly="readonly" class="form-control" data-autocomplete-placeholder="Osoba"/>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" data-autocomplete="Osoba" asp-for="@Model.OibosobaNavigation.Ime"/>
+                </div>
+
+                <label asp-for="IdPrioriteta" class="col-sm-1 col-form-label">Prioritet</label>
+                <div class="col-auto">
+                    <input asp-for="IdPrioriteta" readonly="readonly" class="form-control" data-autocomplete-placeholder="Prioritet"/>
+                </div>
+                <div class="col-auto">
+                    <input class="form-control" data-autocomplete="Prioritet" asp-for="@Model.IdPrioritetaNavigation.Naziv"/>
+                </div>
+
+
+            </div>
+
+            <div class="col-auto" style="width: 50%; padding: 20px">
+
+                <label asp-for="PlaniraniPocetak" class="col-sm-1 col-form-label">Planirani Početak</label>
+                <div class="col-auto">
+                    <input asp-for="PlaniraniPocetak" class="form-control datum"/>
+                </div>
+
+                <label asp-for="PlaniraniZavrsetak" class="col-sm-1 col-form-label">Planirani Završetak</label>
+                <div class="col-auto">
+                    <input asp-for="PlaniraniZavrsetak" class="form-control datum"/>
+                </div>
+
+                <label asp-for="StvarniPocetak" class="col-sm-1 col-form-label">Stvarni Početak</label>
+                <div class="col-auto">
+                    <input asp-for="StvarniPocetak" class="form-control datum"/>
+                </div>
+
+                <label asp-for="StvarniZavrsetak" class="col-sm-1 col-form-label">Stvarni Završetak</label>
+                <div class="col-auto">
+                    <input asp-for="StvarniZavrsetak" class="form-control datum"/>
+                </div>
+
+
+                <div class="col-auto">
+                    <button id="save" type="submit" class="btn btn-sm btn-primary save" title="Spremi">
+                        <i class="fas fa-save"></i>
+                    </button>
+                    <a class="btn btn-sm btn-primary cancel"
+                       asp-action="Edit"
+                       asp-route-id="@Model.IdZadatka"
+                       asp-route-page="@ViewBag.Page"
+                       asp-route-sort="@ViewBag.Sort"
+                       asp-route-ascending="@ViewBag.Ascending"
+                       asp-route-filter="@ViewBag.Filter"
+                       asp-route-position="@ViewBag.Position"
+                       title="Osvježi">
+                        <i class="fas fa-sync-alt"></i>
+                    </a>
+                    <a class="btn btn-sm btn-primary cancel"
+                       asp-action="Index"
+                       asp-route-page="@ViewBag.Page"
+                       asp-route-sort="@ViewBag.Sort"
+                       asp-route-ascending="@ViewBag.Ascending"
+                       asp-route-filter="@ViewBag.Filter"
+                       title="Odustani">
+                        <i class="fas fa-undo-alt"></i>
+                    </a>
+                    <hr/>
+                    <div style="justify-content: center">
+                        Napomena: Ova stranica ima implementirani AutoComplete na gotovo svim tekstualnim poljima tako da ako upišete recimo "h" i ne nekom polju Vam ne nudi ništa, to ne znači da AutoComplete ne radi pravilno već da u bazi podataka nema podatka koji sadrži slovo "h".
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    @{
+                        string[] nazivi = { "Opis Rada", "Datum Rada", "Vrijeme Rada", "Osoba", "Vrsta Posla" };
+                        for (int i = 0; i < nazivi.Length; i++)
+                        {
+                            <th class="text-center">
+                                @nazivi[i]
+                            </th>
+                        }
+                    }
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var posao in Model.RadoviPravi)
+                {
+                    <tr>
+                        <td class="text-left ">
+                            <input type="hidden" name="Posao[@posao.IdEvidencijaRad].IdStavke" value="@posao.IdEvidencijaRad"/>
+                            <input name="Posao[@posao.IdEvidencijaRad].Opis" class="form-control" value="@posao.Opis" data-autocomplete="OpisEvRada"/>
+                        </td>
+
+                        <td class="text-center">
+                            <input name="Posao[@posao.IdEvidencijaRad].DatumRada" class="form-control" type="datetime-local" value="@posao.DatumRada.ToString("yyyy-MM-ddTHH:mm")"/>
+                        </td>
+
+                        <td class="text-center">
+                            <input name="Posao[@posao.IdEvidencijaRad].VrijemeRada" class="form-control" type="number" value="@posao.VrijemeRada"/>
+                        </td>
+
+                        <td class="text-center">
+                            <input name="Posao[@posao.IdEvidencijaRad].Persona" class="form-control" type="text" value="@posao.Persona" data-autocomplete="Osoba2"/>
+                        </td>
+
+                        <td class="text-center">
+                            <input name="Posao[@posao.IdEvidencijaRad].vrstaposlica" class="form-control" type="text" value="@posao.vrstaposlica" data-autocomplete="VrstaPosla"/>
+                        </td>
+
+
+                        <td>
+                            <button class="btn btn-sm btn-danger deleterow" title="Izbaci">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td >
+                        <input id="Opis" type="text" data-autocomplete="OpisEvRada"/>
+                        <input type="hidden" id="IdStavke"/>
+                    </td>
+                    <td class="text-center col-sm-1">
+                        <input id="DatumRada" type="Date"/>
+                    </td>
+                    <td class="text-center col-sm-1">
+                        <input id="VrijemeRada" type="number"/>
+                    </td>
+                    <td class="text-right col-sm-2">
+                        <input id="Persona" type="text" data-autocomplete="Osoba3"/>
+                    </td>
+
+                    <td class="text-right col-sm-2">
+                        <input id="vrstaposlica" type="text" data-autocomplete="VrstaPosla"/>
+                    </td>
+
+                    <td class="text-left" colspan="3">
+                        <button type="button" id="dodajnovired" class="btn btn-sm btn-secondary" title="Dodaj">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </td>
+
+
+                </tr>
+
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Čekajte da se stranica potpuno učita
+
+        // Dodajte slušač događaja na gumb za dodavanje novog reda
+        var dodajNoviRedButton = document.getElementById('dodajnovired');
+        dodajNoviRedButton.addEventListener('click', function () {
+            // Dohvatite tablicu
+            var tabela = document.querySelector('table');
+
+            // Kreirajte novi red na vrhu tablice
+            var noviRed = tabela.insertRow(1); // 1 dodaje red na drugo mjesto, što je vrh tablice
+
+       
+            var najveciId = 1000;
+            var sveRedove = tabela.querySelectorAll('input[name^="Posao["]');
+            sveRedove.forEach(function (input) {
+                var currentId = parseInt(input.getAttribute('name').match(/\[(\d+)\]/)[1]);
+                najveciId = Math.max(najveciId, currentId);
+            });
+
+          
+            var noviId = najveciId + 1;
+
+            // Postavite jedinstveni identifikator za novi red
+            noviRed.id = 'novired' + noviId;
+
+            // Dodajte ćelije u novi red
+            var inputIds = ['Opis', 'DatumRada', 'VrijemeRada', 'Persona', 'vrstaposlica'];
+            for (var i = 0; i < inputIds.length; i++) {
+                var celija = noviRed.insertCell(i);
+                var input = document.createElement('input');
+            
+                // Postavite atribute i klase prema potrebama
+                input.type = 'text';
+                input.className = 'form-control';
+            
+                // Postavite name atribut kako bi model mogao pravilno prikupiti podatke
+                input.name = 'Posao[' + noviId + '].' + inputIds[i];
+                
+            
+                // Uzmi vrijednost iz odgovarajućeg polja u formi i postavi je kao vrijednost inputa
+                var inputValue = document.getElementById(inputIds[i]).value;
+                input.value = inputValue;
+            
+                // Dodajte input u ćeliju
+                celija.appendChild(input);
+            }
+            // Dodajte skriveno polje za IdStavke
+                        var celijaIdStavke = noviRed.insertCell(inputIds.length);
+                        var hiddenInputIdStavke = document.createElement('input');
+                        hiddenInputIdStavke.type = 'hidden';
+                        hiddenInputIdStavke.name = 'Posao[' + noviId + '].IdStavke';
+                        hiddenInputIdStavke.value = noviId;
+            
+                        celijaIdStavke.appendChild(hiddenInputIdStavke);
+
+            // Dodajte gumb za brisanje u novi red
+            var celijaZaBrisanje = noviRed.insertCell(inputIds.length);
+            var deleteButton = document.createElement('button');
+            deleteButton.className = 'btn btn-sm btn-danger deleterow';
+            deleteButton.title = 'Izbaci';
+            deleteButton.innerHTML = '<i class="fa fa-minus"></i>';
+
+            // Dodajte slušač događaja za brisanje reda
+            deleteButton.addEventListener('click', function () {
+                noviRed.parentNode.removeChild(noviRed);
+            });
+
+            // Dodajte gumb u ćeliju
+            celijaZaBrisanje.appendChild(deleteButton);
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Čekajte da se stranica potpuno učita
+
+        // Dodajte slušač događaja na sve elemente sa klasom "deleterow"
+        var deleteButtons = document.querySelectorAll('.deleterow');
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                // Pronađite roditeljski <tr> element i uklonite ga
+                var row = button.closest('tr');
+                row.parentNode.removeChild(row);
+            });
+        });
+    });
+</script>
+
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css"/>
+}
+
+@section scripts{
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+}

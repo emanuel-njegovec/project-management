@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ZadatakDTOViewModel>
+
+<table class="table table-striped" id="table-stavke">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Ime zadatka", "Planirani početak", "Planirani završetak", "Stvarni početak", "Stvarni završetak", "Zahtjev", "Status", "Ime osobe", "Prioritet"};
+                for (int i = 0; i < nazivi.Length; i++)
+                {
+                    <th class="text-center">
+                        @nazivi[i]                        
+                    </th>
+                }
+            }
+            <th></th>           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var zadatak in Model)
+        {
+            <tr>
+                <td class="text-left col-sm-4">
+                    <input type="hidden" name="Zadatak.Index" value="@zadatak.IdZadatka"/>
+                    <input type="hidden" name="Zadatak[@zadatak.IdZadatka].IdZadatka" value="@zadatak.IdZadatka" />
+                    <input type="hidden" name="Zadatak[@zadatak.IdZadatka].ImeZadatka" value="@zadatak.ImeZadatka" />
+                    @zadatak.ImeZadatka                                 
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="Zadatak[@zadatak.IdZadatka].PlaniraniPocetak" class="form-control" value="@zadatak.PlaniraniZavrsetak" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="Zadatak[@zadatak.IdZadatka].PlaniraniZavrsetak" class="form-control" value="@zadatak.PlaniraniZavrsetak"/>
+                </td>
+                 <td class="text-center col-sm-1">
+                    <input name="Zadatak[@zadatak.IdZadatka].StvarniPocetak" class="form-control" value="@zadatak.StvarniPocetak"/>
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="Zadatak[@zadatak.IdZadatka].StvarniZavrsetak" class="form-control" value="@zadatak.StvarniZavrsetak" />
+                </td>
+                <!-- Add other fields as needed -->
+                <td>
+                    <button class="btn btn-sm btn-danger deleterow" title="Izbaci"><i class="fa fa-minus"></i></button>
+                </td>               
+            </tr>
+        }
+    
+        <tr>
+            <td>
+                <input id="idZadatka" type="hidden" data-autocomplete-placeholder="zadatak" readonly="readonly" />
+                <input id="imeZadatka" type="text" data-autocomplete="zadatak" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="planiraniPocetak" type="date" name="Zadatak.NewItem.PlaniraniPocetak" /> 
+                </td>
+                <!-- Add other fields for the new item -->
+                <td class="text-center col-sm-1">
+                    <input id="idZahtjeva" type="text" name="Zadatak.NewItem.IdZahtjeva" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="idStatusa" type="text" name="Zadatak.NewItem.IdStatusa" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="idPrioriteta" type="text" name="Zadatak.NewItem.IdPrioriteta" />
+                </td>
+                <td class="text-left" colspan="3">
+                    <button id="dodajZadatak" class="btn btn-sm btn-secondary" title="Dodaj"><i class="fas fa-plus"></i></button>
+                </td>
+        </tr>
+    </tbody>
+</table>

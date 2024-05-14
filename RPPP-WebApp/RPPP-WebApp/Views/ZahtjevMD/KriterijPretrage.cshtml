@@ -1,0 +1,60 @@
+﻿@model ZahtjevFilter
+
+
+<form id="filterform" asp-action="Filter" method="post">
+    <div class="form-group row">
+        <label asp-for="IdZahtjeva" class="col-sm-4 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdZahtjeva" readonly="readonly" class="form-control" data-autocomplete-placeholder="Zahtjev" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="Zahtjev" asp-for="Naslov" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Opis</label>
+        <div class="col-sm-6">
+            <input asp-for="Opis" class="form-control" />
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdVrsteZahtjeva" class="col-sm-4 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdVrsteZahtjeva" readonly="readonly" class="form-control" data-autocomplete-placeholder="VrstaZahtjeva" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="VrstaZahtjeva" asp-for="IdVrsteZahtjevaNavigation.Naziv" />
+        </div>               
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="IdPrioriteta" class="col-sm-4 col-form-label"></label>
+        <div class="col-sm-2">
+            <input asp-for="IdPrioriteta" readonly="readonly" class="form-control" data-autocomplete-placeholder="Prioritet" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="Prioritet" asp-for="IdPrioritetaNavigation.Naziv" />
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdProjekta" class="col-sm-4 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdProjekta" readonly="readonly" class="form-control" data-autocomplete-placeholder="Projekt" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="Projekt" asp-for="IdProjektaNavigation.Naziv" />
+        </div>               
+    </div>
+
+    <div class="col-sm-1 text-nowrap">
+            <button type="submit" class="btn btn-sm btn-primary" title="Postavi filter"><i class="fas fa-filter"></i>Postavi</button>           
+               
+            <a class="btn btn-sm btn-primary" asp-action="Index" title="Ukloni filter">
+                <i class="fas fa-trash"></i>Ukloni
+            </a>
+        </div>
+        
+</form>

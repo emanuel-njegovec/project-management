@@ -1,0 +1,120 @@
+﻿@model ZadatakMDViewModel
+
+@{
+    ViewBag.Title = "ZadatakMD";
+}
+
+<h2>Master-Detail</h2>
+
+<div class="float-end">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, sort = Model.PagingInfo.Sort, ascending = Model.PagingInfo.Ascending })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<table class="table table-sm table-striped table-hover">
+  <thead>
+  <tr>
+    <th>
+      <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+        Naziv Zadatka
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+        Planirani Početak
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+        Planirani Završetak
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+        Stvarni Početak
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">
+        Stvarni Završetak
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">
+        Zahtjev
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 7 ? !Model.PagingInfo.Ascending : true)">
+        Status
+      </a>
+    </th>
+    <th>
+      <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 8 ? !Model.PagingInfo.Ascending : true)">
+        OIB Osobe
+      </a>
+    </th>
+    
+    <th>
+      <a asp-route-sort="9" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 9 ? !Model.PagingInfo.Ascending : true)">
+        Prioritet 
+      </a>
+    </th>
+    
+    <th>
+      <a asp-route-sort="10" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 10 ? !Model.PagingInfo.Ascending : true)">
+        Evidencija Rada 
+      </a>
+    </th>
+    
+  </tr>
+  </thead>
+  
+  <tbody>
+    @foreach (var zadatak in Model.Zadaci)
+    {
+      <tr>
+        <td class="text-center">   <a href="@Url.Action("Show", new { id = zadatak.IdZadatka })">@zadatak.ImeZadatka</a></td>
+        <td class="text-center">@zadatak.PlaniraniPocetak</td>
+        <td class="text-center">@zadatak.PlaniraniZavrsetak</td>
+        <td class="text-center">@zadatak.StvarniPocetak</td>
+        <td class="text-center">@zadatak.StvarniZavrsetak</td>
+        <td class="text-center">@zadatak.IdZahtjevaNavigation.Naslov</td>
+        <td class="text-center">@zadatak.IdStatusNavigation.Naziv</td>
+        <td class="text-center">@zadatak.OibosobaNavigation.Ime @zadatak.OibosobaNavigation.Prezime</td>
+        <td class="text-center">@zadatak.IdPrioritetaNavigation.Naziv</td>
+        <td class="text-center">
+            @if (zadatak.EvidencijaRada.Any())
+             {
+               @String.Join(", ", zadatak.EvidencijaRada.Select(evidencija => evidencija.Opis))
+             }
+            
+
+
+        </td>
+
+      </tr>
+    }
+    </tbody>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</table>

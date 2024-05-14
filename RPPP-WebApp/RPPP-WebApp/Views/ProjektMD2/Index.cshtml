@@ -1,0 +1,128 @@
+@model ProjektMDViewModel
+
+@{
+    ViewBag.Title = "ProjektMD2";
+}
+
+<div class="float-end">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, sort = Model.PagingInfo.Sort, ascending = Model.PagingInfo.Ascending })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+  <div class="form-group row">
+    <div class="col-sm-4">
+      <h2>Pregled svih Projekata</h2>
+      <br />
+      <a asp-action="Create">Unos novog Projekta</a>
+    </div>
+  </div>
+</div>
+
+
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    Id projekta
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Naziv projekta
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Vrsta projekta
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Opis projekta
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    datumPocetka
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    datumZavrsetka
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="7" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    OIB narucitelja
+                </a>
+            </th>
+            <th>
+                  <a asp-route-sort="8" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 10 ? !Model.PagingInfo.Ascending : true)">
+                    Dokumenti 
+                  </a>
+                </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+                @foreach (var projekt in Model.Projekti)
+                {
+            <tr>
+                <td class="text-left">@projekt.Naziv</td>
+                <td class="text-left">@projekt.Opis</td>
+                <td class="text-left">@projekt.IdVrsteProjekta</td>
+                <td class="text-left">@projekt.DatumPocetka</td>
+                <td class="text-left">@projekt.DatumZavrsetka</td>
+                <td class="text-left">@projekt.Oibnarucitelj</td>
+                <td class="text-left">
+                    @if (projekt.Dokuments.Any())
+                    {
+                        @String.Join(", ", projekt.Dokuments.Select(dok => dok.Format))
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@projekt.IdProjekta"
+                       asp-route-page="@Model.PagingInfo.CurrentPage"
+                       asp-route-sort="@Model.PagingInfo.Sort"
+                       asp-route-ascending="@Model.PagingInfo.Ascending"
+                       asp-route-position="@Model.Filter"
+                       class="btn btn-warning btn-sm" title="Ažuriraj"><i class="fas fa-edit"></i></a>
+                </td>
+                <td>
+                    <form asp-action="Delete" method="post"
+                          asp-route-page="@Model.PagingInfo.CurrentPage"
+                          asp-route-sort="@Model.PagingInfo.Sort"
+                          asp-route-ascending="@Model.PagingInfo.Ascending">
+                        <input type="hidden" name="IdProjekta" value="@projekt.IdProjekta" />
+                        <button type="submit" class="btn btn-sm btn-danger delete" title="Obriši"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </td>
+            </tr>
+                }
+    </tbody>
+</table>
+
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+
+@section scripts{
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js"></script>
+    <script src="~/js/autocomplete.js" asp-append-version="true"></script>
+}

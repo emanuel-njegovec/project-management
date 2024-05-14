@@ -1,0 +1,64 @@
+﻿@model EvidencijaRada
+
+@{
+    ViewBag.Title = "Evidencija Rada";
+    Layout = "_Layout";
+}
+
+<h2>Uređivanje Rada</h2>
+
+
+<form asp-action="Edit" method="post">
+  
+  <div asp-validation-summary="All"></div>
+  
+  <input asp-for="IdEvidencijaRad" type="hidden" /> <!-- Dodano skriveno polje za ID zadatka -->
+
+  <div class="mb-3">
+    <label asp-for="Opis" class="form-label">Opis Rada</label>
+    <input asp-for="Opis" class="form-control" />
+    <div class="form-text"><span asp-validation-for="Opis" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="DatumRada" class="form-label">Planirani Početak</label>
+    <input asp-for="DatumRada" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="DatumRada" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="VrijemeRada" class="form-label">Vrijeme Rada</label>
+    <input asp-for="VrijemeRada" class="form-control" />
+    <div class="form-text"><span asp-validation-for="VrijemeRada" class="text-danger"></span></div>
+  </div>
+  <div class="mb-3">
+    <label asp-for="OibosobaNavigation.Ime" class="form-label">Odaberite Osobu</label>
+    <select class="form-control" asp-for="OibosobaNavigation.Ime" asp-items="ViewBag.Ljudi">
+      <option disabled selected value="">------------------</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="OibosobaNavigation.Ime" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="IdZadatkaNavigation.ImeZadatka" class="form-label">Odaberite Zadatak</label>
+    <select class="form-control" asp-for="IdZadatkaNavigation.ImeZadatka" asp-items="ViewBag.Zadatci">
+      <option disabled selected value="">------------------</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="IdZadatkaNavigation.ImeZadatka" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+      <label asp-for="IdVrstePoslaNavigation.Naziv" class="form-label">Odaberite Vrstu Posla</label>
+      <select class="form-control" asp-for="IdVrstePoslaNavigation.Naziv" asp-items="ViewBag.VrstePosla">
+        <option disabled selected value="">------------------</option>
+      </select>
+      <div class="form-text"><span asp-validation-for="IdVrstePoslaNavigation.Naziv" class="text-danger"></span></div>
+    </div>
+  
+  <div class="text-center">
+    <button class="btn btn-primary" type="submit">Spremi promjene</button>
+    <a asp-action="Index" class="btn btn-default">Odustani</a>
+  </div>
+
+</form>
+

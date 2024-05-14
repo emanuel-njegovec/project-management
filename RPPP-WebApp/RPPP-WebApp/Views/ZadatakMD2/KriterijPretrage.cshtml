@@ -1,0 +1,99 @@
+﻿@model ZadatakFilter
+
+
+<form id="filterform" asp-action="Filter" method="post">
+    <div class="form-group row">
+        <label asp-for="IdZadatka" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdZadatka" readonly="readonly" class="form-control" data-autocomplete-placeholder="zadatak" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="zadatak" asp-for="ImeZadatka" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Planirani Datum</label>
+        <div class="col-sm-4">
+            <input asp-for="DatumOdPlan" class="form-control" />
+        </div>
+        <div class="col-sm-1">
+            -
+        </div>
+        <div class="col-sm-4">
+            <input asp-for="DatumDoPlan" class="form-control" />
+        </div>
+        <div class="col-sm-1 text-nowrap">
+            <button type="submit" class="btn btn-sm btn-primary" title="Postavi filter"><i class="fas fa-filter"></i></button>           
+               
+            <a class="btn btn-sm btn-primary" asp-action="Index" title="Ukloni filter">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Stvarni Datum</label>
+        <div class="col-sm-4">
+            <input asp-for="DatumOdStvar" class="form-control" />
+        </div>
+        <div class="col-sm-1">
+            -
+        </div>
+        <div class="col-sm-4">
+            <input asp-for="DatumDoStvar" class="form-control" />
+        </div>
+        <div class="col-sm-1 text-nowrap">
+            <button type="submit" class="btn btn-sm btn-primary" title="Postavi filter"><i class="fas fa-filter"></i></button>           
+                   
+            <a class="btn btn-sm btn-primary" asp-action="Index" title="Ukloni filter">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdZahtjeva" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdZahtjeva" readonly="readonly" class="form-control" data-autocomplete-placeholder="zahtjev" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="zahtjev" asp-for="IdZahtjevaNavigation.Naslov" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdStatus" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdStatus" readonly="readonly" class="form-control" data-autocomplete-placeholder="status" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="status" asp-for="IdStatusNavigation.IdStatus" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="Oibosoba" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="Oibosoba" readonly="readonly" class="form-control" data-autocomplete-placeholder="oib" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="oib" asp-for="OibosobaNavigation.Oibosoba" />
+        </div>               
+    </div>
+    
+    <div class="form-group row">
+        <label asp-for="IdPrioriteta" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-2">         
+            <input asp-for="IdPrioriteta" readonly="readonly" class="form-control" data-autocomplete-placeholder="prioritet" />
+        </div>
+        <div class="col-sm-6">
+            <input class="form-control" data-autocomplete="prioritet" asp-for="IdPrioritetaNavigation.IdPrioriteta" />
+        </div>               
+    </div>
+    
+    
+    
+    
+    
+</form>

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "Projekti i Dokumenti";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<ul>
+    <li>
+        <a asp-action="ProjektiMD2">Excel - Projekti i dokumenti</a>
+    </li>
+    <li>
+        <a asp-action="Projekti">Excel - Popis projekata</a>
+    </li>
+    <li>
+        <a asp-action="Dokumenti">Excel - Dokumenti</a>
+    </li>
+    <li>
+        <a asp-action="ProjektiPDF">PDF - Popis projekata</a>
+    </li>
+    <li>
+        <a asp-action="DokumentiPDF">PDF - Dokumenti</a>
+    </li>
+</ul>
+
+<h3>Uvezi Projekt</h3>
+
+<form method="post" enctype="multipart/form-data" asp-action="UveziProjekt">
+    <div class="form-group">
+        <label for="excelFile">Odaberite Excel datoteku:</label>
+        <input type="file" class="form-control-file" id="excelFile" name="excelFile" accept=".xlsx">
+    </div>
+    <button type="submit" class="btn btn-primary">Uvezi podatke</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+<h3>Uvezi Dokumente</h3>
+
+<form method="post" enctype="multipart/form-data" asp-action="UveziDokument">
+    <div class="form-group">
+        <label for="excelFile">Odaberite Excel datoteku:</label>
+        <input type="file" class="form-control-file" id="excelFile2" name="excelFile2" accept=".xlsx">
+
+    </div>
+    <button type="submit" class="btn btn-primary">Uvezi podatke</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3" role="alert">
+        @ViewBag.Message
+    </div>
+}

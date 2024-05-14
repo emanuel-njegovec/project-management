@@ -1,0 +1,85 @@
+﻿@model ZahtjevSTPViewModel
+
+@{
+    ViewBag.Title = "Zahtjevi";
+}
+
+<h2>Pregled svih zahtjeva</h2>
+
+
+<div class="float-end">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i, sort = Model.PagingInfo.Sort, ascending = Model.PagingInfo.Ascending })">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a asp-route-sort="1" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 1 ? !Model.PagingInfo.Ascending : true)">
+                    Naziv
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="2" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 2 ? !Model.PagingInfo.Ascending : true)">
+                    Opis
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="3" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 3 ? !Model.PagingInfo.Ascending : true)">
+                    Vrsta zahtjeva
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="4" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 4 ? !Model.PagingInfo.Ascending : true)">
+                    Prioritet
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="5" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 5 ? !Model.PagingInfo.Ascending : true)">
+                    Projekt
+                </a>
+            </th>
+            <th>
+                <a asp-route-sort="6" asp-route-page="@Model.PagingInfo.CurrentPage" asp-route-ascending="@(Model.PagingInfo.Sort == 6 ? !Model.PagingInfo.Ascending : true)">
+                    Zadaci
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var zahtjev in Model.Zahtjevii)
+        {
+            <tr>
+                <td class="text-left"><a href="@Url.Action("Show", new { id = zahtjev.IdZahtjeva })">@zahtjev.Naslov</a></td>
+                <td class="text-left">@zahtjev.Opis</td>
+                <td class="text-left">@zahtjev.IdVrsteZahtjevaNavigation.Naziv</td>
+                <td class="text-left">@zahtjev.IdPrioritetaNavigation.Naziv</td>
+                <td class="text-left">@zahtjev.IdProjektaNavigation.Naziv</td>
+                <td class="text-left"></td>
+                <td>
+                    @if (zahtjev.Zadataks.Any())
+                    {
+                        @String.Join(", ", zahtjev.Zadataks.Select(z => z.ImeZadatka))
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@section scripts{
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/js/pager.js" asp-append-version="true"></script>
+}

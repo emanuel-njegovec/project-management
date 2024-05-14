@@ -1,0 +1,117 @@
+﻿{
+   "CodeGenerationMode": 3,
+   "ContextClassName": "DBContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Models",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "RPPP_WebApp",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 0,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[dbo].[DOKUMENT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EVIDENCIJA_RADA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[EVIDENCIJA_ULOGA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[NARUCITELJ]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ORGANIZACIJA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[OSOBA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PRIORITET]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PROJEKT]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[PROJEKTNA_KARTICA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[STATUS]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[TRANSAKCIJA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ULOGA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VRSTA_DOKUMENTA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VRSTA_POSLA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VRSTA_PROJEKTA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VRSTA_TRANSAKCIJE]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VRSTA_ZAHTJEVA]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ZADATAK]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ZAHTJEV]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "dosa.RPPP03.dbo",
+   "UncountableWords": null,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDateOnlyTimeOnly": false,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": false
+}

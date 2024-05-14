@@ -1,0 +1,40 @@
+﻿@model ProjektnaKartica
+
+
+<tr hx-target="this" hx-swap="outerHTML">
+    <td class="text-start">
+        <input asp-for="IdKartice" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Ibankartice" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Stanje" class="form-control" />
+    </td>
+    <td class="text-start">
+        <select class="form-select" asp-for="IdProjekta" asp-items="ViewBag.Projekti">
+        </select>
+    </td>
+    <td class="text-start">
+        <select class="form-select" asp-for="Oibosoba" asp-items="ViewBag.Osobe">
+        </select>
+    </td>
+    <td>
+        <input type="hidden" asp-for="IdKartice" />
+        <button hx-include="closest tr"
+                hx-post="@Url.Action(nameof(ProjektnaKarticaController.Edit))"
+                class="btn btn-sm btn-success" title="Spremi">
+            SPREMI
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-sm btn-secondary"
+                hx-get="@Url.Action(nameof(ProjektnaKarticaController.Get), new { id = Model.IdKartice })"
+                title="Odustani">
+            ODUSTANI
+        </button>
+    </td>
+    <td>
+        <div asp-validation-summary="All"></div>
+    </td>
+</tr>

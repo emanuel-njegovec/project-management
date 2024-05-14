@@ -1,0 +1,70 @@
+﻿@model EvidencijaRadaViewModel
+
+@{
+    ViewBag.Title = "ZadatakMD";
+}
+
+
+<h2>Priakz</h2>
+
+<div class="row justify-content-sm-center">
+  <div class="col-sm-1 text-left">
+    <a class="btn btn-sm btn-primary cancel" title="Povratak na popis poslova" href="#" onclick="history.back(); return false;">
+      <i class="fas fa-undo-alt"></i>
+    </a>
+  </div>
+</div>
+
+
+<table class="table table-sm table-striped table-hover">
+  <thead>
+  <tr>
+    <th>
+      <a>
+        Opis Rada
+      </a>
+    </th>
+    <th>
+      <a>
+        Datum Rada
+      </a>
+    </th>
+    <th>
+      <a>
+        Vrijeme Rada
+      </a>
+    </th>
+    <th>
+      <a>
+        Osoba
+      </a>
+    </th>
+    <th>
+      <a>
+        Zadatak
+      </a>
+    </th>
+    <th>
+      <a>
+        Vrsta Posla
+      </a>
+    </th>
+    <th></th>
+  </tr>
+  </thead>
+  
+  <tbody>
+    @foreach (var rad in Model.EviRadovi)
+    {
+      <tr>
+        <td class="text-center">@rad.Opis</td>
+        <td class="text-center">@rad.DatumRada</td>
+        <td class="text-center">@rad.VrijemeRada</td>
+        <td class="text-center">@rad.OibosobaNavigation.Ime @rad.OibosobaNavigation.Prezime</td>
+        <td class="text-center">@rad.IdZadatkaNavigation.ImeZadatka</td>
+        <td class="text-center">@rad.IdVrstePoslaNavigation.Naziv</td>
+      </tr>
+    }
+    </tbody>
+      
+  </table>

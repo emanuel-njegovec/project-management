@@ -1,0 +1,89 @@
+﻿@model RPPP_WebApp.Views.Zadatak.ZadatakDTO
+
+
+@{
+    ViewBag.Title = "Zadatak";
+}
+
+<h2>Unos Novog Zadatka</h2>
+
+<form asp-action="Create" method="post">
+  
+  <div asp-validation-summary="All"></div>
+  
+  <div class="mb-3">
+    <label asp-for="ImeZadatka"  class="form-label">Naziv zadatka</label>
+    <input asp-for="ImeZadatka" class="form-control"/>
+    <div class="form-text"><span asp-validation-for="ImeZadatka" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="PlaniraniPocetak" class="form-label">Planirani početak</label>
+    <input asp-for="PlaniraniPocetak" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="PlaniraniPocetak" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="PlaniraniZavrsetak" class="form-label">Planirani završetak</label>
+    <input asp-for="PlaniraniZavrsetak" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="PlaniraniZavrsetak" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="StvarniPocetak" class="form-label">Stvarni početak</label>
+    <input asp-for="StvarniPocetak" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="StvarniPocetak" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="StvarniZavrsetak" class="form-label">Stvarni završetak</label>
+    <input asp-for="StvarniZavrsetak" class="form-control" type="date" />
+    <div class="form-text"><span asp-validation-for="StvarniZavrsetak" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="NazZahtjeva" class="form-label">Zahtjev</label>
+    <select class="form-control" asp-for="NazZahtjeva" asp-items="ViewBag.Zahtjevi">
+      <option disabled selected value="">Odaberite zahtjev</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="NazZahtjeva" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="NazStatus" class="form-label">Status</label>
+    <select class="form-control" asp-for="NazStatus" asp-items="ViewBag.Statusi">
+      <option disabled selected value="">Odaberite status</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="NazStatus" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="NazOsoba" class="form-label">Osoba</label>
+    <select class="form-control" asp-for="NazOsoba" asp-items="ViewBag.Osobe">
+      <option disabled selected value="">Odaberite osobu</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="NazOsoba" class="text-danger"></span></div>
+  </div>
+  
+  <div class="mb-3">
+    <label asp-for="NazPrioriteta" class="form-label">Prioritet</label>
+    <select class="form-control" asp-for="NazPrioriteta" asp-items="ViewBag.Prioriteti">
+      <option disabled selected value="">Odaberite prioritet</option>
+    </select>
+    <div class="form-text"><span asp-validation-for="NazPrioriteta" class="text-danger"></span></div>
+  </div>
+  
+  
+  
+  <div class="text-center">
+    <button class="btn btn-primary" type="submit">Dodaj</button>
+    <a asp-action="Index" class="btn btn-default">Odustani</a>
+  </div>
+
+
+
+</form>
+
+
+
+

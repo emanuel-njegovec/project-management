@@ -1,0 +1,74 @@
+﻿@model KarticaTransakcijeViewModel
+@{
+    ViewBag.Title = "Transakcije za karticu";
+}
+
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-8">
+            <h4>
+                @Model.IdKartice/@Model.Ibankartice/@Model.Stanje
+            </h4>
+        </div>
+    </div>
+
+    <div class="row justify-content-sm-center">
+        <div class="col-sm-1 text-left">
+            <a class="btn btn-sm btn-primary"
+               asp-action="Index"
+               asp-route-page="@ViewBag.Page"
+               asp-route-sort="@ViewBag.Sort"
+               asp-route-ascending="@ViewBag.Ascending"
+               title="Povratak na popis dokumenata">
+                NATRAG
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    @{
+                        string[] nazivi = { "Šifra", "Iznos", "IBAN2", "Datum", "Vrijeme", "IBAN kartice", "Opis transakcije" };
+                        for (int i = 0; i < nazivi.Length; i++)
+                        {
+                            <th class="text-left">
+                                @nazivi[i]
+                            </th>
+                        }
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var transakcija in Model.Transakcije)
+                {
+                    <tr>
+                        <td class="text-left col-sm-4">
+                            @transakcija.IdTransakcije
+                        </td>
+                        <td class="text-left col-sm-1">
+                            @transakcija.Iznos.ToString()
+                        </td>
+                        <td class="text-left col-sm-1">
+                            @transakcija.Iban2zaTransakciju
+                        </td>
+                        <td class="text-left col-sm-2">
+                            @transakcija.Datum
+                        </td>
+                        <td class="text-left col-sm-2">
+                            @transakcija.Vrijeme
+                        </td>
+                        <td class="text-left col-sm-2">
+                            @transakcija.IbanKartice
+                        </td>
+                        <td class="text-left col-sm-2">
+                            @transakcija.Opis
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

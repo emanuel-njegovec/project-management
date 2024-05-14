@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Zadaci i Evidencija Radova";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<ul>
+    <li>
+        <a asp-action="ZadaciMD2">Excel - Zadaci sa evidencijom radova</a>
+    </li>
+    <li>
+        <a asp-action="Zadaci">Excel - Popis Zadataka</a>
+    </li>
+    <li>
+        <a asp-action="EvidencijaRadova">Excel - Evidencija Radova</a>
+    </li>
+    <li>
+        <a asp-action="ZadaciPDF">PDF - Popis Zadataka</a>
+    </li>
+    <li>
+        <a asp-action="EvidencijaRadaPDF">PDF - Evidencija Radova</a>
+    </li>
+</ul>
+
+<h3>Uvezi Zadatak</h3>
+
+<form method="post" enctype="multipart/form-data" asp-action="UveziZadatak">
+    <div class="form-group">
+        <label for="excelFile">Odaberite Excel datoteku:</label>
+        <input type="file" class="form-control-file" id="excelFile" name="excelFile" accept=".xlsx">
+    </div>
+    <button type="submit" class="btn btn-primary">Uvezi podatke</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+<h3>Uvezi Evidenciju Rada</h3>
+
+<form method="post" enctype="multipart/form-data" asp-action="UveziEvidencijuRada">
+    <div class="form-group">
+        <label for="excelFile">Odaberite Excel datoteku:</label>
+        <input type="file" class="form-control-file" id="excelFile2" name="excelFile2" accept=".xlsx">
+
+    </div>
+    <button type="submit" class="btn btn-primary">Uvezi podatke</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-success mt-3" role="alert">
+        @ViewBag.Message
+    </div>
+}

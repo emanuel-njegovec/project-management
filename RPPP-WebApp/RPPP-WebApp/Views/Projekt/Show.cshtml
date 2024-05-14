@@ -1,0 +1,64 @@
+@model DokumentiViewModel
+
+@{
+    ViewBag.Title = "ProjektMD";
+}
+
+
+<h2>Prikaz</h2>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-1 text-left">
+        <a class="btn btn-sm btn-primary cancel" title="Povratak na popis projekata" href="#" onclick="history.back(); return false;">
+            <i class="fas fa-undo-alt"></i>
+        </a>
+    </div>
+</div>
+
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+    <tr>
+        <th>
+            <a>
+                Datum Nastanka
+            </a>
+        </th>
+        <th>
+            <a>
+                Stavka
+            </a>
+        </th>
+        <th>
+            <a>
+                Format
+            </a>
+        </th>
+        <th>
+            <a>
+                Vrsta
+            </a>
+        </th>
+        <th>
+            <a>
+                Projekt
+            </a>
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+  
+    <tbody>
+    @foreach (var rad in Model.Dokumenti)
+    {
+        <tr>
+            <td class="text-center">@rad.DatumNastanka</td>
+            <td class="text-center">@rad.Stavka</td>
+            <td class="text-center">@rad.Format</td>
+            <td class="text-center">@rad.IdVrsteDokumenta</td>
+            <td class="text-center">@rad.IdProjekta</td>
+        </tr>
+    }
+    </tbody>
+      
+</table>

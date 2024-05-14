@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EvidencijaRadaViewModel>
+
+<table class="table table-striped" id="table-stavke">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Opis Rada", "Datum Rada", "Vrijeme Rada", "Osoba", "Zadatak", "Vrsta Posla" };
+                for (int i = 0; i < nazivi.Length; i++)
+                {
+                    <th class="text-center">
+                        @nazivi[i]                        
+                    </th>
+                }
+            }
+            <th></th>           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var evidencija in Model)
+        {
+            <tr>
+                <td class="text-left col-sm-4">
+                    <input type="hidden" name="EviRadovi.Index" value="@evidencija.IdEvidencijaRad"/>
+                    <input type="hidden" name="EviRadovi[@evidencija.IdEvidencijaRad].IdEvidencijaRad" value="@evidencija.IdEvidencijaRad" />
+                    <input type="hidden" name="EviRadovi[@evidencija.IdEvidencijaRad].Opis" value="@evidencija.Opis" /> 
+                    <input type="hidden" name="EviRadovi[@evidencija.IdEvidencijaRad].DatumRada" value="@evidencija.DatumRada" />
+                    @evidencija.Opis                                 
+                </td>
+                <td class="text-center col-sm-1">
+                    <input name="EviRadovi[@evidencija.IdEvidencijaRad].VrijemeRada" class="form-control" value="@evidencija.VrijemeRada"/>
+                </td>
+                <!-- Add other fields as needed -->
+                <td>
+                    <button class="btn btn-sm btn-danger deleterow" title="Izbaci"><i class="fa fa-minus"></i></button>
+                </td>               
+            </tr>
+        }
+    
+        <tr>
+            <td>
+                    <input id="opis" type="text" name="EviRadovi.NewItem.Opis" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="vrijemeRada" type="text" name="EviRadovi.NewItem.VrijemeRada" /> 
+                </td>
+                <!-- Add other fields for the new item -->
+                <td class="text-center col-sm-1">
+                    <input id="oibOsoba" type="text" name="EviRadovi.NewItem.Oibosoba" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="idZadatka" type="text" name="EviRadovi.NewItem.IdZadatka" />
+                </td>
+                <td class="text-center col-sm-1">
+                    <input id="idVrstePosla" type="text" name="EviRadovi.NewItem.IdVrstePosla" />
+                </td>
+                <td class="text-left" colspan="3">
+                    <button id="dodajEvidenciju" class="btn btn-sm btn-secondary" title="Dodaj"><i class="fas fa-plus"></i></button>
+                </td>
+        </tr>
+    </tbody>
+</table>

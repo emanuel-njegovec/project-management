@@ -1,0 +1,59 @@
+﻿@model TransakcijeViewModel
+
+@{
+    ViewBag.Title = "Transakcije";
+}
+
+<div class="container">
+    <div class="form-group row">
+        <div class="col-sm-4">
+            <h2>Pregled svih transakcija</h2>
+            <br />
+            <a asp-action="Create">Unos nove transakcije</a>
+        </div>
+    </div>
+</div>
+
+<pager page-info="@Model.PagingInfo" page-action="Index" page-title="Unesite željenu stranicu"
+       class="float-end">
+</pager>
+
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            @{
+                string[] nazivi = { "Šifra", "Iznos", "IBAN2", "Datum", "Vrijeme", "IBAN kartice", "Opis transakcije" };
+                for (int i = 1; i <= nazivi.Length; i++)
+                {
+                    <th>
+                        <a asp-route-sort="@i"
+                           asp-route-page="@Model.PagingInfo.CurrentPage"
+                           asp-route-ascending="@(Model.PagingInfo.Sort == i ? !Model.PagingInfo.Ascending : true)">
+                            @nazivi[i - 1]
+                        </a>
+                    </th>
+                }
+            }
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transakcija in Model.Transakcije)
+        {
+            <partial name="Get" model="transakcija" />
+        }
+    </tbody>
+</table>
+
+@section styles{
+    <link rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" />
+}
+
+@section scripts{
+    <script src="/lib/jqueryui/jquery-ui.js"></script>
+    <script src="/js/pager.js" asp-append-version="true"></script>
+    <script src="~/lib/htmx/htmx.min.js" asp-append-version="true"></script>
+}

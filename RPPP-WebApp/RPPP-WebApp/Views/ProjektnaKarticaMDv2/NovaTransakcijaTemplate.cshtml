@@ -1,0 +1,24 @@
+﻿<table id="template" style="visibility:hidden">
+    <tr>
+        <td class="text-left col-sm-4">
+            <input type="hidden" name="Transakcije.Index" value="--sifra--" />
+            <input type="hidden" name="Transakcije[--sifra--].Iznos" value="--sifra--" />
+            --naziv--
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="Transakcije[--sifra--].Iban2zaTransakciju" class="form-control" value="--Iban2zaTransakciju--" />
+        </td>
+        <td class="text-center col-sm-1">
+            <input name="Transakcije[--sifra--].Datum" class="form-control" value="--Datum--" />
+        </td>
+        <td class="text-right col-sm-3">
+            <input type="hidden" name="Transakcije[--sifra--].Vrijeme" value="--Vrijeme--" />
+        </td>
+        <td class="text-right col-sm-3">
+            <input type="hidden" name="Transakcije[--sifra--].OpisTransakcije" value="--OpisTransakcije--" />
+        </td>
+        <td>
+            <button class="btn btn-sm btn-danger deleterow" title="Izbaci">Izbaci</button>
+        </td>
+    </tr>
+</table>

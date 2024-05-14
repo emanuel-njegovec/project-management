@@ -1,0 +1,88 @@
+﻿@model ZadatakViewModel
+
+@{
+    ViewBag.Title = "Zahtjev";
+}
+
+
+<h2>@Model.Zadatci.FirstOrDefault().IdZahtjevaNavigation.Naslov</h2>
+
+<div class="row justify-content-sm-center">
+    <div class="col-sm-1 text-left">
+        <a class="btn btn-sm btn-primary cancel" title="Povratak" href="#" onclick="history.back(); return false;">
+            <i class="fas fa-undo-alt"></i>Povratak
+        </a>
+    </div>
+</div>
+
+
+<table class="table table-sm table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                <a>
+                    Naziv
+                </a>
+            </th>
+            <th>
+                <a>
+                    Planirani početak
+                </a>
+            </th>
+            <th>
+                <a>
+                    Planirani završetak
+                </a>
+            </th>
+            <th>
+                <a>
+                    Stvarni početak
+                </a>
+            </th>
+            <th>
+                <a>
+                    Stvarni završetak
+                </a>
+            </th>
+            <th>
+                <a>
+                    Zahtjev
+                </a>
+            </th>
+            <th>
+                <a>
+                    Status
+                </a>
+            </th>
+            <th>
+                <a>
+                    OIB Osobe
+                </a>
+            </th>
+            <th>
+                <a>
+                    Prioritet
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var zadatak in Model.Zadatci)
+        {
+            <tr>
+                <td class="text-left">@zadatak.ImeZadatka</td>
+                <td class="text-left">@zadatak.PlaniraniPocetak</td>
+                <td class="text-left">@zadatak.PlaniraniZavrsetak</td>
+                <td class="text-left">@zadatak.StvarniPocetak</td>
+                <td class="text-left">@zadatak.StvarniZavrsetak</td>
+                <td class="text-left">@zadatak.IdZahtjevaNavigation.Naslov</td>
+                <td class="text-left">@zadatak.IdStatusNavigation.Naziv</td>
+                <td class="text-left">@zadatak.OibosobaNavigation.Ime @zadatak.OibosobaNavigation.Prezime</td>
+                <td class="text-left">@zadatak.IdPrioritetaNavigation.Naziv</td>
+            </tr>
+        }
+    </tbody>
+
+</table>

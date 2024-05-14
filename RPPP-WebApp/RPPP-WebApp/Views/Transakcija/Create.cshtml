@@ -1,0 +1,56 @@
+﻿@model Transakcija
+
+@{
+    ViewBag.Title = "Nova transakcija";
+}
+
+<h2>Unos novog mjesta</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Iznos" class="form-label"></label>
+        <input asp-for="Iznos" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Iznos" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Iban2zaTransakciju" class="form-label"></label>
+        <input asp-for="Iban2zaTransakciju" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Iban2zaTransakciju" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Datum" class="form-label"></label>
+        <input asp-for="Datum" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Datum" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Vrijeme" class="form-label"></label>
+        <input asp-for="Vrijeme" class="form-control" />
+        <div class="form-text"><span asp-validation-for="Vrijeme" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="IdKartice" class="form-label"></label>
+        <select class="form-control" asp-for="IdKartice" asp-items="ViewBag.Kartice">
+            <option disabled selected value="">Odaberite projektnu karticu</option>
+        </select>
+        <div class="form-text"><span asp-validation-for="IdKartice" class="text-danger"></span></div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="IdVrsteTransakcije" class="form-label"></label>
+        <select class="form-control" asp-for="IdVrsteTransakcije" asp-items="ViewBag.VrsteTransakcija">
+            <option disabled selected value="">Odaberite vrstu transakcije</option>
+        </select>
+        <div class="form-text"><span asp-validation-for="IdVrsteTransakcije" class="text-danger"></span></div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Dodaj</button>
+        <a asp-action="Index" class="btn btn-default">Odustani</a>
+    </div>
+</form>
+
+@section scripts {
+    <script asp-src-include="~/lib/jquery-validate/**/jquery.validate.min.js"></script>
+    <script asp-src-include="~/lib/jquery-validation-unobtrusive/**/*.min.js"></script>
+
+    <script src="~/js/validation.js" asp-append-version="true"></script>
+}

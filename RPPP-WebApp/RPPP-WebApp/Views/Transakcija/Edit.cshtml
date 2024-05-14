@@ -1,0 +1,46 @@
+﻿@model Transakcija
+
+
+<tr hx-target="this" hx-swap="outerHTML">
+    <td class="text-start">
+        <input asp-for="IdTransakcije" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Iznos" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Iban2zaTransakciju" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Datum" class="form-control" />
+    </td>
+    <td class="text-start">
+        <input asp-for="Vrijeme" class="form-control" />
+    </td>
+    <td class="text-start">
+        <select class="form-select" asp-for="IdKartice" asp-items="ViewBag.Kartice">
+        </select>
+    </td>
+    <td class="text-start">
+        <select class="form-select" asp-for="IdVrsteTransakcije" asp-items="ViewBag.VrsteTransakcija">
+        </select>
+    </td>
+    <td>
+        <input type="hidden" asp-for="IdTransakcije" />
+        <button hx-include="closest tr"
+                hx-post="@Url.Action(nameof(TransakcijaController.Edit))"
+                class="btn btn-sm btn-success" title="Spremi">
+            SPREMI
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-sm btn-secondary"
+                hx-get="@Url.Action(nameof(TransakcijaController.Get), new { id = Model.IdTransakcije })"
+                title="Odustani">
+            ODUSTANI
+        </button>
+    </td>
+    <td>
+        <div asp-validation-summary="All"></div>
+    </td>
+</tr>
